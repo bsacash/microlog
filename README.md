@@ -1,3 +1,6 @@
+```
+pip install microlog
+```
 # microlog
 Simple, lightweight logging
 
