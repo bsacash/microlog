@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import platform
 import math
 from datetime import datetime, timezone
 
@@ -12,7 +13,11 @@ class Logger():
         self.console = console
 
         if not self.__filename:
-            self.__filename = self._time()
+            # Replace colons in filename if Windows
+            if platform.system() == "Windows":
+                self.__filename = self._time().replace(":","_")
+            else:
+                self.__filename = self._time()
         if self.__file:
             file = open("{}.log".format(self.__filename),"a+")
             file.close()
