@@ -50,7 +50,7 @@ class Logger():
     # Write a generic log message
     def log(self, message):
         ts = self._time()
-        self._write("{ts}  {msg}".format(ts=ts, msg=message))
+        self._write("{ts} {msg}".format(ts=ts, msg=message))
 
     # Write a level specific log message
     def _base(self, level, message):
