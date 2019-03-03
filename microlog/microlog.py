@@ -38,7 +38,7 @@ class Logger():
             print(line)
         if self.__file:
             file = open("{}.log".format(self.__filename), "a")
-            file.write("{}{}".format(line,"\n"))
+            file.write("{}\n".format(line))
             file.close()
         self._logs.append(line)
 
