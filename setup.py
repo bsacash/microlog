@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="microlog",
-    version="0.0.1",
+    version="0.0.2",
     author="Brian Sacash",
     description="A simple and lightweight logging library",
     long_description=long_description,
