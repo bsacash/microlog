@@ -18,7 +18,7 @@ class Logger():
             else:
                 self.__filename = self._time()
         elif isinstance(self.__file, str):
-            self.__filename == file
+            self.__filename = self.__file
         else:
             self.__filename = None
 
