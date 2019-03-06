@@ -28,9 +28,13 @@ Logger(file = "my_logs")
 ```
 Logs are written using the append option so they can be added to existing log files.
 ### 2. Console
-Log messages will not be written to the console by default. Set the `console` parameter to `True` to see log messages in the console.
+Log messages will be written to the console by default. Set the `console` parameter to `False` to stop seeing log messages in the console.
 ```
-Logger(console = True)
+Logger(console = False)
+```
+You can change this status using the `console()` method.
+```
+my_logs.console(False)
 ```
 ### 3. Time format
 All references to time will be local date-time by default. To use a UTC timestamp, set the `ts` parameter to `True`.  This will apply to default log file names and times in the log files.

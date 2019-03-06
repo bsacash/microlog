@@ -5,11 +5,11 @@ import math
 from datetime import datetime, timezone
 
 class Logger():
-    def __init__(self, file=False, console=False, ts=False):
+    def __init__(self, file=False, console=True, ts=False):
         self._ts = ts
         self.__file = file
         self._logs = []
-        self._console = console
+        self.__console = console
 
 
         if file == True:
@@ -38,7 +38,7 @@ class Logger():
 
     # Write log messages to the consol, log file, and/or memory
     def _write(self, line):
-        if self._console:
+        if self.__console:
             print(line)
         if self.__file:
             file = open("{}.log".format(self.__filename), "a")
@@ -46,11 +46,11 @@ class Logger():
             file.close()
         self._logs.append(line)
 
-    # Toggle log messages appearing in the console (off by default)
-    def set_console(self, state):
+    # Toggle log messages appearing in the console (on by default)
+    def console(self, state):
         if isinstance(state, bool):
-            self._console = state
-        return self._console
+            self.__console = state
+        return self.__console
 
     # Return the last n logs (all by default)
     def logs(self, n=0):
