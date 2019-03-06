@@ -5,19 +5,23 @@ import math
 from datetime import datetime, timezone
 
 class Logger():
-    def __init__(self, filename=None, file=True, console=False, format="dt"):
-        self.__filename = filename
+    def __init__(self, file=False, console=False, format="dt"):
+        self._format = format
         self.__file = file
         self._logs = []
-        self._format = format
-        self.console = console
+        self._console = console
 
-        if not self.__filename:
-            # Replace colons in filename if Windows
-            if platform.system() == "Windows":
+
+        if file == True:
+            if platform.system() == "Windows": # Replace colons in filename if Windows
                 self.__filename = self._time().replace(":","_")
             else:
                 self.__filename = self._time()
+        elif isinstance(self.__file, str):
+            self.__filename == file
+        else:
+            self.__filename = None
+
         if self.__file:
             file = open("{}.log".format(self.__filename),"a+")
             file.close()
@@ -34,7 +38,7 @@ class Logger():
 
     # Write log messages to the consol, log file, and/or memory
     def _write(self, line):
-        if self.console:
+        if self._console:
             print(line)
         if self.__file:
             file = open("{}.log".format(self.__filename), "a")
@@ -45,8 +49,8 @@ class Logger():
     # Toggle log messages appearing in the console (off by default)
     def set_console(self, state):
         if isinstance(state, bool):
-            self.console = state
-        return self.console
+            self._console = state
+        return self._console
 
     # Return the last n logs (all by default)
     def logs(self, n=0):
