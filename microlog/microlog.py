@@ -5,19 +5,22 @@ import math
 from datetime import datetime, timezone
 
 class Logger():
-    def __init__(self, filename=None, file=True, console=False, format="dt"):
-        self.__filename = filename
+    def __init__(self, file=False, console=True, ts=False):
+        self._ts = ts
         self.__file = file
         self._logs = []
-        self._format = format
-        self.console = console
+        self.__console = console
 
-        if not self.__filename:
-            # Replace colons in filename if Windows
-            if platform.system() == "Windows":
+        if file == True:
+            if platform.system() == "Windows": # Replace colons in filename if Windows
                 self.__filename = self._time().replace(":","_")
             else:
                 self.__filename = self._time()
+        elif isinstance(self.__file, str):
+            self.__filename = self.__file
+        else:
+            self.__filename = None
+
         if self.__file:
             file = open("{}.log".format(self.__filename),"a+")
             file.close()
@@ -25,7 +28,7 @@ class Logger():
     # Calculate datetime or timestamp for filename and/or log messages
     def _time(self):
         dt = datetime.now()
-        if self._format == "dt":
+        if not self._ts:
             dt = dt.strftime('%Y-%m-%d %H:%M:%S')
             return dt
         else:
@@ -34,7 +37,7 @@ class Logger():
 
     # Write log messages to the consol, log file, and/or memory
     def _write(self, line):
-        if self.console:
+        if self.__console:
             print(line)
         if self.__file:
             file = open("{}.log".format(self.__filename), "a")
@@ -42,11 +45,11 @@ class Logger():
             file.close()
         self._logs.append(line)
 
-    # Toggle log messages appearing in the console (off by default)
-    def set_console(self, state):
+    # Toggle log messages appearing in the console (on by default)
+    def console(self, state):
         if isinstance(state, bool):
-            self.console = state
-        return self.console
+            self.__console = state
+        return self.__console
 
     # Return the last n logs (all by default)
     def logs(self, n=0):
