@@ -5,8 +5,8 @@ import math
 from datetime import datetime, timezone
 
 class Logger():
-    def __init__(self, file=False, console=False, format="dt"):
-        self._format = format
+    def __init__(self, file=False, console=False, ts=False):
+        self._ts = ts
         self.__file = file
         self._logs = []
         self._console = console
@@ -29,7 +29,7 @@ class Logger():
     # Calculate datetime or timestamp for filename and/or log messages
     def _time(self):
         dt = datetime.now()
-        if self._format == "dt":
+        if not self._ts:
             dt = dt.strftime('%Y-%m-%d %H:%M:%S')
             return dt
         else:

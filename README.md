@@ -33,7 +33,7 @@ Log messages will not be written to the console by default. Set the `console` pa
 Logger(console = True)
 ```
 ### 3. Time format
-All references to time will be local date-time by default. To use a UTC timestamp, set the `format` parameter to `"ts"`.  This will apply to default log file names and times in the log files.
+All references to time will be local date-time by default. To use a UTC timestamp, set the `ts` parameter to `True`.  This will apply to default log file names and times in the log files.
 ```
-Logger(format = "ts")
+Logger(ts = True)
 ```
