@@ -11,7 +11,6 @@ class Logger():
         self._logs = []
         self.__console = console
 
-
         if file == True:
             if platform.system() == "Windows": # Replace colons in filename if Windows
                 self.__filename = self._time().replace(":","_")
